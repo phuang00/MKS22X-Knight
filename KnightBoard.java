@@ -7,7 +7,7 @@ public class KnightBoard{
   @throws IllegalArgumentException when either parameter is negative.
   */
   public KnightBoard(int startingRows,int startingCols){
-    if (startingRows < 0 || startingCols < 0) throw new IllegalArgumentException();
+    if (startingRows <= 0 || startingCols <= 0) throw new IllegalArgumentException();
     board = new int[startingRows][startingCols];
   }
 
@@ -65,9 +65,48 @@ public class KnightBoard{
     return 0;
   }
 
+  private void remove(int level){
+    for (int i = 0; i < board.length; i++){
+      for (int j = 0; j < board[i].length; j++){
+        if (board[i][j] > level) board[i][j] = 0;
+      }
+    }
+  }
+
 
   private boolean solveH(int row ,int col, int level){
-    return false;
+    if (row < 0 || row >= board.length || col < 0 || col >= board[0].length) {
+      return false;
+    }
+    if (level > board.length * board[0].length) return true;
+    boolean ans = false;
+    if (board[row][col] == 0){
+      board[row][col] = level;
+      if (solveH(row - 2, col + 1, level + 1)) return true;
+      remove(level);
+      if (solveH(row - 2, col - 1, level + 1)) return true;
+      remove(level);
+      if (solveH(row - 1, col + 2, level + 1)) return true;
+      remove(level);
+      if (solveH(row - 1, col - 2, level + 1)) return true;
+      remove(level);
+      if (solveH(row + 1, col + 2, level + 1)) return true;
+      remove(level);
+      if (solveH(row + 1, col - 2, level + 1)) return true;
+      remove(level);
+      if (solveH(row + 2, col + 1, level + 1)) return true;
+      remove(level);
+      if (solveH(row + 2, col - 1, level + 1)) return true;
+      remove(level);
+    }
+    if (ans == false){
+      for (int i = 0; i < board.length; i++){
+        for (int j = 0; j < board[i].length; j++){
+          if (board[i][j] == level) board[i][j] = 0;
+        }
+      }
+    }
+    return ans;
   }
   // level is the # of the knight
 }
