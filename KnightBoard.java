@@ -16,13 +16,12 @@ public class KnightBoard{
     String ans = "";
     for (int i = 0; i < board.length; i++){
       for (int j = 0; j < board[i].length; j++){
-        if (j != board[i].length - 1){
-          if (board[i][j] == 0) ans += digits + " ";
-          else;
-        }
-        else{
-          if (board[i][j] == 0) ans += digits + "\n";
-        }
+        int temp = board[i][j];
+        if (temp == 0) ans += digits;
+        else if (temp < 10 && digits.length() == 2) ans += "_" + temp;
+        else ans += temp;
+        if (j != board[i].length - 1) ans += " ";
+        else ans += '\n';
       }
     }
     return ans;
