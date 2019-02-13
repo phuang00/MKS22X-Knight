@@ -7,6 +7,7 @@ public class KnightBoard{
   @throws IllegalArgumentException when either parameter is negative.
   */
   public KnightBoard(int startingRows,int startingCols){
+    if (startingRows < 0 || startingCols < 0) throw new IllegalArgumentException();
     board = new int[startingRows][startingCols];
   }
 
@@ -40,7 +41,19 @@ public class KnightBoard{
    or out of bounds.
    */
   public boolean solve(int startingRow, int startingCol){
-    return false;
+    if (startingRow < 0 ||
+        startingCol < 0 ||
+        startingRow >= board.length ||
+        startingCol >= board[0].length) throw new IllegalArgumentException();
+    //if the parameters are negative or out of bounds, throw IllegalArgumentException
+    for (int i = 0; i < board.length; i++){
+      for (int j = 0; j < board[i].length; j++){
+        if (board[i][j] != 0) throw new IllegalStateException();
+        // if the values of the board are not zero, throw IllegalStateException
+      }
+    }
+    return solveH(startingRow, startingCol, 1);
+    // call helper function
   }
 
   /*
