@@ -7,7 +7,18 @@ public class Driver{
         ans += a.countSolutions(i,j);
       }
     }
-    System.out.println(ans);
+    System.out.println("Number of Solutions: " + ans);
+    boolean printed = false;
+    for (int i = 0; i < 1; i++){
+      for (int j = 0; j < 1; j++){
+        if (!printed){
+          if (a.solve(i,j) == true){
+            printed = true;
+          }
+        }
+      }
+    }
+    System.out.println("Has Solution: " + printed);
     System.out.println(a);
 
     System.out.println();
@@ -19,7 +30,18 @@ public class Driver{
         ans += a.countSolutions(i,j);
       }
     }
-    System.out.println(ans);
+    System.out.println("Number of Solutions: " + ans);
+    printed = false;
+    for (int i = 0; i < 2; i++){
+      for (int j = 0; j < 2; j++){
+        if (!printed){
+          if (a.solve(i,j) == true){
+            printed = true;
+          }
+        }
+      }
+    }
+    System.out.println("Has Solution: " + printed);
     System.out.println(a);
 
     System.out.println();
@@ -31,7 +53,18 @@ public class Driver{
         ans += a.countSolutions(i,j);
       }
     }
-    System.out.println(ans);
+    System.out.println("Number of Solutions: " + ans);
+    printed = false;
+    for (int i = 0; i < 3; i++){
+      for (int j = 0; j < 3; j++){
+        if (!printed){
+          if (a.solve(i,j) == true){
+            printed = true;
+          }
+        }
+      }
+    }
+    System.out.println("Has Solution: " + printed);
     System.out.println(a);
 
     System.out.println();
@@ -43,7 +76,18 @@ public class Driver{
         ans += a.countSolutions(i,j);
       }
     }
-    System.out.println(ans);
+    System.out.println("Number of Solutions: " + ans);
+    printed = false;
+    for (int i = 0; i < 4; i++){
+      for (int j = 0; j < 4; j++){
+        if (!printed){
+          if (a.solve(i,j) == true){
+            printed = true;
+          }
+        }
+      }
+    }
+    System.out.println("Has Solution: " + printed);
     System.out.println(a);
 
     System.out.println();
@@ -55,20 +99,87 @@ public class Driver{
         ans += a.countSolutions(i,j);
       }
     }
-    System.out.println(ans);
+    System.out.println("Number of Solutions: " + ans);
+    printed = false;
+    for (int i = 0; i < 5; i++){
+      for (int j = 0; j < 5; j++){
+        if (!printed){
+          if (a.solve(i,j) == true){
+            printed = true;
+          }
+        }
+      }
+    }
+    System.out.println("Has Solution: " + printed);
     System.out.println(a);
 
     System.out.println();
 
-    a = new KnightBoard(3,10);
+    a = new KnightBoard(3,4);
+    ans = 0;
+    for (int i = 0; i < 3; i++){
+      for (int j = 0; j < 4; j++){
+        ans += a.countSolutions(i,j);
+      }
+    }
+    System.out.println("Number of Solutions: " + ans);
+    printed = false;
+    for (int i = 0; i < 3; i++){
+      for (int j = 0; j < 4; j++){
+        if (!printed){
+          if (a.solve(i,j) == true){
+            printed = true;
+          }
+        }
+      }
+    }
+    System.out.println("Has Solution: " + printed);
+    System.out.println(a);
+
+    System.out.println();
+
+    a = new KnightBoard(3,7);
     ans = 0;
     for (int i = 0; i < 3; i++){
       for (int j = 0; j < 7; j++){
         ans += a.countSolutions(i,j);
       }
     }
-    System.out.println(ans);
-    a.solve(0,0);
+    System.out.println("Number of Solutions: " + ans);
+    printed = false;
+    for (int i = 0; i < 3; i++){
+      for (int j = 0; j < 7; j++){
+        if (!printed){
+          if (a.solve(i,j) == true){
+            printed = true;
+          }
+        }
+      }
+    }
+    System.out.println("Has Solution: " + printed);
+    System.out.println(a);
+
+    System.out.println();
+
+    a = new KnightBoard(3,9);
+    ans = 0;
+    for (int i = 0; i < 3; i++){
+      for (int j = 0; j < 9; j++){
+        ans += a.countSolutions(i,j);
+      }
+    }
+    System.out.println("Number of Solutions: " + ans);
+    printed = false;
+    for (int i = 0; i < 3; i++){
+      for (int j = 0; j < 9; j++){
+        if (!printed){
+          if (a.solve(i,j) == true){
+            printed = true;
+          }
+        }
+      }
+    }
+    System.out.println("Has Solution: " + printed);
     System.out.println(a);
   }
 }
