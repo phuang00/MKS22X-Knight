@@ -52,7 +52,9 @@ public class KnightBoard{
         // if the values of the board are not zero, throw IllegalStateException
       }
     }
-    return solveH(startingRow, startingCol, 1);
+    boolean ans = solveH(startingRow, startingCol, 1);
+    if (!ans) remove(-1);
+    return ans;
     // call helper function
   }
 
