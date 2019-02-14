@@ -2,7 +2,7 @@ public class KnightBoard{
   private int[][] board;
 
 
-  /*
+  /**
   Initialize the board to the correct size and make them all 0's
   @throws IllegalArgumentException when either parameter is negative.
   */
@@ -35,7 +35,7 @@ public class KnightBoard{
     return ans;
   }
 
-  /*
+  /**
   @throws IllegalStateException when the board contains non-zero values.
   @throws IllegalArgumentException when either parameter is negative
    or out of bounds.
@@ -56,7 +56,7 @@ public class KnightBoard{
     // call helper function
   }
 
-  /*
+  /**
   @throws IllegalStateException when the board contains non-zero values.
   @throws IllegalArgumentException when either parameter is negative
    or out of bounds.
@@ -79,10 +79,14 @@ public class KnightBoard{
     // call helper function
   }
 
+  /** Removes all knights on the board higher than the given number
+  */
   private void remove(int level){
     for (int i = 0; i < board.length; i++){
       for (int j = 0; j < board[i].length; j++){
+        // loop through whole board
         if (board[i][j] > level) board[i][j] = 0;
+        // if the number at the current position is greater than level, set it to zero
       }
     }
   }
@@ -90,12 +94,17 @@ public class KnightBoard{
 
   private boolean solveH(int row ,int col, int level){
     if (row < 0 || row >= board.length || col < 0 || col >= board[0].length) {
+      // if the row or col are out of bounds, return false
       return false;
     }
     boolean ans = false;
+    // default ans is false
     if (board[row][col] == 0){
+      // if there is no knight at the given row and col
       board[row][col] = level;
+      // set the spot to the level number
       if (level == board.length * board[0].length) return true;
+      // if the level is the last knight to be put on the board, return true
       if (solveH(row - 2, col + 1, level + 1)) return true;
       remove(level);
       if (solveH(row - 2, col - 1, level + 1)) return true;
@@ -112,8 +121,10 @@ public class KnightBoard{
       remove(level);
       if (solveH(row + 2, col - 1, level + 1)) return true;
       remove(level);
+      // run through all 8 possible directions the knight can go to next and if that works, return true
     }
     if (!ans) remove(level - 1);
+    //if there is already a number on the spot, remove all knights greater than level - 1
     return ans;
   }
   // level is the # of the knight
