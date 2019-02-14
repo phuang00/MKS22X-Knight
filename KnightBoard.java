@@ -52,9 +52,7 @@ public class KnightBoard{
         // if the values of the board are not zero, throw IllegalStateException
       }
     }
-    boolean ans = solveH(startingRow, startingCol, 1);
-    if (!ans) remove(-1);
-    return ans;
+    return solveH(startingRow, startingCol, 1);
     // call helper function
   }
 
@@ -76,11 +74,7 @@ public class KnightBoard{
       }
     }
     int ans = calcH(startingRow, startingCol, 1);
-    for (int i = 0; i < board.length; i++){
-      for (int j = 0; j < board[i].length; j++){
-        board[i][j] = 0;
-      }
-    }
+    remove(-1);
     return ans;
     // call helper function
   }
@@ -119,6 +113,7 @@ public class KnightBoard{
       if (solveH(row + 2, col - 1, level + 1)) return true;
       remove(level);
     }
+    if (!ans) remove(level - 1);
     return ans;
   }
   // level is the # of the knight
