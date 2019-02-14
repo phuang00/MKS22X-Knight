@@ -117,13 +117,6 @@ public class KnightBoard{
       if (solveH(row + 2, col - 1, level + 1)) return true;
       remove(level);
     }
-    if (ans == false){
-      for (int i = 0; i < board.length; i++){
-        for (int j = 0; j < board[i].length; j++){
-          if (board[i][j] == level) board[i][j] = 0;
-        }
-      }
-    }
     return ans;
   }
   // level is the # of the knight
@@ -152,13 +145,6 @@ public class KnightBoard{
       remove(level);
       ans += calcH(row + 2, col - 1, level + 1);
       remove(level);
-    }
-    if (ans == 0){
-      for (int i = 0; i < board.length; i++){
-        for (int j = 0; j < board[i].length; j++){
-          if (board[i][j] == level) board[i][j] = 0;
-        }
-      }
     }
     return ans;
   }
