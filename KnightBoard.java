@@ -62,7 +62,25 @@ public class KnightBoard{
    or out of bounds.
    */
   public int countSolutions(int startingRow, int startingCol){
-    return 0;
+    if (startingRow < 0 ||
+        startingCol < 0 ||
+        startingRow >= board.length ||
+        startingCol >= board[0].length) throw new IllegalArgumentException();
+    //if the parameters are negative or out of bounds, throw IllegalArgumentException
+    for (int i = 0; i < board.length; i++){
+      for (int j = 0; j < board[i].length; j++){
+        if (board[i][j] != 0) throw new IllegalStateException();
+        // if the values of the board are not zero, throw IllegalStateException
+      }
+    }
+    int ans = calcH(startingRow, startingCol, 1);
+    for (int i = 0; i < board.length; i++){
+      for (int j = 0; j < board[i].length; j++){
+        board[i][j] = 0;
+      }
+    }
+    return ans;
+    // call helper function
   }
 
   private void remove(int level){
@@ -78,10 +96,10 @@ public class KnightBoard{
     if (row < 0 || row >= board.length || col < 0 || col >= board[0].length) {
       return false;
     }
-    if (level > board.length * board[0].length) return true;
     boolean ans = false;
     if (board[row][col] == 0){
       board[row][col] = level;
+      if (level == board.length * board[0].length) return true;
       if (solveH(row - 2, col + 1, level + 1)) return true;
       remove(level);
       if (solveH(row - 2, col - 1, level + 1)) return true;
@@ -109,4 +127,39 @@ public class KnightBoard{
     return ans;
   }
   // level is the # of the knight
+
+  private int calcH(int row ,int col, int level){
+    if (row < 0 || row >= board.length || col < 0 || col >= board[0].length) {
+      return 0;
+    }
+    int ans = 0;
+    if (board[row][col] == 0){
+      board[row][col] = level;
+      if (level == board.length * board[0].length) return 1;
+      ans += calcH(row - 2, col + 1, level + 1);
+      remove(level);
+      ans += calcH(row - 2, col - 1, level + 1);
+      remove(level);
+      ans += calcH(row - 1, col + 2, level + 1);
+      remove(level);
+      ans += calcH(row - 1, col - 2, level + 1);
+      remove(level);
+      ans += calcH(row + 1, col + 2, level + 1);
+      remove(level);
+      ans += calcH(row + 1, col - 2, level + 1);
+      remove(level);
+      ans += calcH(row + 2, col + 1, level + 1);
+      remove(level);
+      ans += calcH(row + 2, col - 1, level + 1);
+      remove(level);
+    }
+    if (ans == 0){
+      for (int i = 0; i < board.length; i++){
+        for (int j = 0; j < board[i].length; j++){
+          if (board[i][j] == level) board[i][j] = 0;
+        }
+      }
+    }
+    return ans;
+  }
 }
