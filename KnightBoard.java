@@ -1,6 +1,6 @@
 public class KnightBoard{
   private int[][] board;
-
+  private int[] coords;
 
   /**
   Initialize the board to the correct size and make them all 0's
@@ -9,6 +9,7 @@ public class KnightBoard{
   public KnightBoard(int startingRows,int startingCols){
     if (startingRows <= 0 || startingCols <= 0) throw new IllegalArgumentException();
     board = new int[startingRows][startingCols];
+    coords = new int[] {-2, -1, -2, 1, -1, -2, -1, 2, 1, -2, 1, 2, 2, -1, 2, 1};
   }
 
   public String toString(){
@@ -97,35 +98,15 @@ public class KnightBoard{
       // if the row or col are out of bounds, return false
       return false;
     }
-    boolean ans = false;
-    // default ans is false
+    if (level > board.length * board[0].length) return true;
     if (board[row][col] == 0){
       // if there is no knight at the given row and col
-      board[row][col] = level;
-      // set the spot to the level number
-      if (level == board.length * board[0].length) return true;
-      // if the level is the last knight to be put on the board, return true
-      if (solveH(row - 2, col + 1, level + 1)) return true;
-      remove(level);
-      if (solveH(row - 2, col - 1, level + 1)) return true;
-      remove(level);
-      if (solveH(row - 1, col + 2, level + 1)) return true;
-      remove(level);
-      if (solveH(row - 1, col - 2, level + 1)) return true;
-      remove(level);
-      if (solveH(row + 1, col + 2, level + 1)) return true;
-      remove(level);
-      if (solveH(row + 1, col - 2, level + 1)) return true;
-      remove(level);
-      if (solveH(row + 2, col + 1, level + 1)) return true;
-      remove(level);
-      if (solveH(row + 2, col - 1, level + 1)) return true;
-      remove(level);
-      // run through all 8 possible directions the knight can go to next and if that works, return true
+      for (int i = 0; i < 16, i+=2){
+        board[row][col] = level;
+        solveH(row)
+      }
     }
-    if (!ans) remove(level - 1);
-    //if there is already a number on the spot, remove all knights greater than level - 1
-    return ans;
+    return false;
   }
   // level is the # of the knight
 
