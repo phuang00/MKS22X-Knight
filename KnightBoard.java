@@ -94,11 +94,11 @@ public class KnightBoard{
 
 
   private boolean solveH(int row ,int col, int level){
+    if (level > board.length * board[0].length) return true;
     if (row < 0 || row >= board.length || col < 0 || col >= board[0].length) {
       // if the row or col are out of bounds, return false
       return false;
     }
-    if (level > board.length * board[0].length) return true;
     if (board[row][col] == 0){
       // if there is no knight at the given row and col
       for (int i = 0; i < 16; i+=2){
@@ -117,24 +117,12 @@ public class KnightBoard{
     }
     int ans = 0;
     if (board[row][col] == 0){
-      board[row][col] = level;
       if (level == board.length * board[0].length) return 1;
-      ans += calcH(row - 2, col + 1, level + 1);
-      remove(level);
-      ans += calcH(row - 2, col - 1, level + 1);
-      remove(level);
-      ans += calcH(row - 1, col + 2, level + 1);
-      remove(level);
-      ans += calcH(row - 1, col - 2, level + 1);
-      remove(level);
-      ans += calcH(row + 1, col + 2, level + 1);
-      remove(level);
-      ans += calcH(row + 1, col - 2, level + 1);
-      remove(level);
-      ans += calcH(row + 2, col + 1, level + 1);
-      remove(level);
-      ans += calcH(row + 2, col - 1, level + 1);
-      remove(level);
+      for (int i = 0; i < 16; i+=2){
+        board[row][col] = level;
+        ans += calcH(row + coords[i], col + coords[i + 1], level + 1);
+        board[row][col] = 0;
+      }
     }
     return ans;
   }
