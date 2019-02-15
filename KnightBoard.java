@@ -101,9 +101,10 @@ public class KnightBoard{
     if (level > board.length * board[0].length) return true;
     if (board[row][col] == 0){
       // if there is no knight at the given row and col
-      for (int i = 0; i < 16, i+=2){
+      for (int i = 0; i < 16; i+=2){
         board[row][col] = level;
-        solveH(row)
+        if (solveH(row + coords[i], col + coords[i + 1], level + 1)) return true;
+        board[row][col] = 0;
       }
     }
     return false;
