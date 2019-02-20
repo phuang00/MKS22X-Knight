@@ -9,30 +9,44 @@ public class KnightBoard{
   */
   public KnightBoard(int startingRows,int startingCols){
     if (startingRows <= 0 || startingCols <= 0) throw new IllegalArgumentException();
+    // if the startingRows or startingCols is less than or equal to 0, throw IllegalStateException
     board = new int[startingRows][startingCols];
+    // initialize board to given size
     coords = new int[] {-2, -1, -2, 1, -1, -2, -1, 2, 1, -2, 1, 2, 2, -1, 2, 1};
+    // initialize coords to contain all 8 possible moves
     moves = new int[startingRows][startingCols];
+    // initialize moves to given size
     fillMoves();
+    // fill moves with the correct number of moves in each spot
   }
 
   private void fillMoves(){
     for (int i = 0; i < moves.length; i++){
       for (int j = 0; j < moves[i].length; j++){
+        // for every place on the moves board
         if (i > 1 && i < moves.length - 2 && j > 1 && j < moves[i].length - 2){
+          // if the place is two spots away from the edges of the board,
           moves[i][j] = 8;
+          // set the number of moves to 8
         }
         else{
           int ans = 0;
+          // starting number of moves is zero
           for (int x = 0; x < 16; x+=2){
+            // for every possible move in the coords list
             i += coords[x];
             j += coords[x + 1];
+            // add it to i and j
             if (!(i < 0 || i >= moves.length || j < 0 || j >= moves[i].length)){
+              // if both i and j do not go out of bounds, add one to the number of moves
               ans++;
             }
             i -= coords[x];
             j -= coords[x + 1];
+            // revert i and j back to original one
           }
           moves[i][j] = ans;
+          // set the number of moves to ans
         }
       }
     }
