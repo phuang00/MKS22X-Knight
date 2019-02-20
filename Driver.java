@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Driver{
   public static void main(String[] args) {
     KnightBoard a = new KnightBoard(1,1);
@@ -112,6 +114,9 @@ public class Driver{
     }
     System.out.println("Has Solution: " + printed);
     System.out.println(a);
+    /*for (int i = 0; i < a.moves.length; i++){
+      System.out.println(Arrays.toString(a.moves[i]));
+    }*/
 
     System.out.println();
 
@@ -181,5 +186,8 @@ public class Driver{
     }
     System.out.println("Has Solution: " + printed);
     System.out.println(a);
+    /*for (int i = 0; i < a.moves.length; i++){
+      System.out.println(Arrays.toString(a.moves[i]));
+    }*/
   }
 }

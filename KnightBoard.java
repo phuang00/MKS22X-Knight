@@ -1,6 +1,7 @@
 public class KnightBoard{
   private int[][] board;
   private int[] coords;
+  private int[][] moves;
 
   /**
   Initialize the board to the correct size and make them all 0's
@@ -10,6 +11,31 @@ public class KnightBoard{
     if (startingRows <= 0 || startingCols <= 0) throw new IllegalArgumentException();
     board = new int[startingRows][startingCols];
     coords = new int[] {-2, -1, -2, 1, -1, -2, -1, 2, 1, -2, 1, 2, 2, -1, 2, 1};
+    moves = new int[startingRows][startingCols];
+    fillMoves();
+  }
+
+  private void fillMoves(){
+    for (int i = 0; i < moves.length; i++){
+      for (int j = 0; j < moves[i].length; j++){
+        if (i > 1 && i < moves.length - 2 && j > 1 && j < moves[i].length - 2){
+          moves[i][j] = 8;
+        }
+        else{
+          int ans = 0;
+          for (int x = 0; x < 16; x+=2){
+            i += coords[x];
+            j += coords[x + 1];
+            if (!(i < 0 || i >= moves.length || j < 0 || j >= moves[i].length)){
+              ans++;
+            }
+            i -= coords[x];
+            j -= coords[x + 1];
+          }
+          moves[i][j] = ans;
+        }
+      }
+    }
   }
 
   public String toString(){
