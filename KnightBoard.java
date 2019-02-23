@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class KnightBoard{
   private int[][] board;
   private int[] coords;
@@ -73,6 +75,20 @@ public class KnightBoard{
         // else add '\n'
       }
     }
+    return ans;
+  }
+
+  private int[] reorder(int row, int col){
+    int[] ans = new int[moves[row][col]];
+    int[] index = new int[moves[row][col]];
+    int count = 0;
+    for (int i = 0; i < coords.length; i+=2){
+      if (!(row < 0 || row >= moves.length || col < 0 || col >= moves[i].length)){
+        for (int j = 0; j < count; j++){
+          
+        }
+    }
+
     return ans;
   }
 
