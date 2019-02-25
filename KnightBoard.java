@@ -194,11 +194,10 @@ public class KnightBoard{
       // if there is no knight at the given row and col
       if (level == board.length * board[0].length) return 1;
       //if the knight is the last knight, return 1
-      int[] temp = reorder(row, col);
-      for (int i = 0; i < temp.length; i++){
+      for (int i = 0; i < 16; i+2){
         // else for every one of the eight paths the knight can go
         board[row][col] = level;
-        ans += calcH(row + coords[temp[i]], col + coords[temp[i] + 1], level + 1);
+        ans += calcH(row + coords[i], col + coords[i + 1], level + 1);
         // add the number of ways from that path to the ans
         board[row][col] = 0;
         // reset it
