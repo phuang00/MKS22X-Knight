@@ -2,15 +2,17 @@ import java.util.*;
 
 public class Driver{
   public static void main(String[] args) {
-    KnightBoard a = new KnightBoard(1,1);
-    int ans = 0;
+    KnightBoard a = new KnightBoard(9,9);
+    System.out.println(a.solve(0,0));
+    System.out.println(a);
+    /*int ans = 0;
     for (int i = 0; i < 1; i++){
       for (int j = 0; j < 1; j++){
         ans += a.countSolutions(i,j);
       }
     }
-    System.out.println("Number of Solutions: " + ans);
-    boolean printed = false;
+    System.out.println("Number of Solutions: " + ans);*/
+    /*boolean printed = false;
     for (int i = 0; i < 1; i++){
       for (int j = 0; j < 1; j++){
         if (!printed){
@@ -23,7 +25,7 @@ public class Driver{
     System.out.println("Has Solution: " + printed);
     System.out.println(a);
 
-    System.out.println();
+    /*System.out.println();
 
     a = new KnightBoard(2,2);
     ans = 0;
@@ -118,7 +120,7 @@ public class Driver{
       System.out.println(Arrays.toString(a.moves[i]));
     }*/
 
-    System.out.println();
+    /*System.out.println();
 
     a = new KnightBoard(3,4);
     ans = 0;

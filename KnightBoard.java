@@ -82,7 +82,7 @@ public class KnightBoard{
     int[] ans = new int[moves[row][col]];
     int count = 0;
     for (int i = 0; i < coords.length; i+=2){
-      if (!(row + coords[i] < 0 || row + coords[i] > board.length || col + coords[i + 1] < 0 || col + coords[i + 1] > board[0].length)){
+      if (!(row + coords[i] < 0 || row + coords[i] >= board.length || col + coords[i + 1] < 0 || col + coords[i + 1] >= board[0].length)){
         ans[count] = i;
         count++;
       }
@@ -169,10 +169,11 @@ public class KnightBoard{
     }
     if (board[row][col] == 0){
       // if there is no knight at the given row and col
-      for (int i = 0; i < 16; i+=2){
+      int[] temp = reorder(row, col);
+      for (int i = 0; i < temp.length; i++){
         // for every one of the eight paths the knight can go
         board[row][col] = level;
-        if (solveH(row + coords[i], col + coords[i + 1], level + 1)) return true;
+        if (solveH(row + coords[temp[i]], col + coords[temp[i] + 1], level + 1)) return true;
         // if the successive knights works, return true
         board[row][col] = 0;
       }
@@ -204,11 +205,4 @@ public class KnightBoard{
     return ans;
   }
 
-  public static void main(String[] args) {
-    KnightBoard a = new KnightBoard(6,6);
-    for (int i = 0; i < 6; i++){
-      System.out.println(Arrays.toString(a.moves[i]));
-    }
-    System.out.println(Arrays.toString(a.reorder(2,2)));
-  }
 }
