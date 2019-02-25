@@ -142,8 +142,6 @@ public class KnightBoard{
     }
     int ans = calcH(startingRow, startingCol, 1);
     // ans is equal to result after calling helper
-    remove(-1);
-    // clear board
     return ans;
     // return ans
   }
