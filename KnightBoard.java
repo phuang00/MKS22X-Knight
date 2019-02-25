@@ -80,15 +80,13 @@ public class KnightBoard{
 
   private int[] reorder(int row, int col){
     int[] ans = new int[moves[row][col]];
-    int[] index = new int[moves[row][col]];
     int count = 0;
     for (int i = 0; i < coords.length; i+=2){
-      if (!(row < 0 || row >= moves.length || col < 0 || col >= moves[i].length)){
-        for (int j = 0; j < count; j++){
-          
-        }
+      if (!(row + coords[i] < 0 || row + coords[i] > board.length || col + coords[i + 1] < 0 || col + coords[i + 1] > board[0].length)){
+        ans[count] = i;
+        count++;
+      }
     }
-
     return ans;
   }
 
@@ -131,9 +129,11 @@ public class KnightBoard{
       }
     }
     int ans = calcH(startingRow, startingCol, 1);
+    // ans is equal to result after calling helper
     remove(-1);
+    // clear board
     return ans;
-    // call helper function
+    // return ans
   }
 
   /** Removes all knights on the board higher than the given number
@@ -190,5 +190,10 @@ public class KnightBoard{
       }
     }
     return ans;
+  }
+
+  public static void main(String[] args) {
+    KnightBoard a = new KnightBoard(4,4);
+    System.out.println(Arrays.toString(a.reorder(0,0)));
   }
 }
