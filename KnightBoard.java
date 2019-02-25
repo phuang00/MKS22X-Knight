@@ -87,6 +87,18 @@ public class KnightBoard{
         count++;
       }
     }
+    for (int i = 0; i < ans.length; i++){
+      int smallest = ans[i];
+      int index = i;
+      for (int j = i; j < ans.length; j++){
+        if (moves[row + coords[ans[j]]][col + coords[ans[j] + 1]] < moves[row + coords[smallest]][col + coords[smallest + 1]]){
+          smallest = ans[j];
+          index = j;
+        }
+      }
+      ans[index] = ans[i];
+      ans[i] = smallest;
+    }
     return ans;
   }
 
@@ -193,7 +205,10 @@ public class KnightBoard{
   }
 
   public static void main(String[] args) {
-    KnightBoard a = new KnightBoard(4,4);
-    System.out.println(Arrays.toString(a.reorder(0,0)));
+    KnightBoard a = new KnightBoard(6,6);
+    for (int i = 0; i < 6; i++){
+      System.out.println(Arrays.toString(a.moves[i]));
+    }
+    System.out.println(Arrays.toString(a.reorder(2,2)));
   }
 }
