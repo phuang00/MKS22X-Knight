@@ -162,7 +162,10 @@ public class KnightBoard{
 
 
   private boolean solveH(int row ,int col, int level){
-    if (level > board.length * board[0].length) return true;
+    if (level == board.length * board[0].length && board[row][col] == 0) {
+      board[row][col] = level;
+      return true;
+    }
     if (row < 0 || row >= board.length || col < 0 || col >= board[0].length) {
       // if either the row or col is out of bounds, return false
       return false;
@@ -193,10 +196,11 @@ public class KnightBoard{
       // if there is no knight at the given row and col
       if (level == board.length * board[0].length) return 1;
       //if the knight is the last knight, return 1
-      for (int i = 0; i < 16; i+=2){
+      int[] temp = reorder(row, col);
+      for (int i = 0; i < temp.length; i++){
         // else for every one of the eight paths the knight can go
         board[row][col] = level;
-        ans += calcH(row + coords[i], col + coords[i + 1], level + 1);
+        ans += calcH(row + coords[temp[i]], col + coords[temp[i] + 1], level + 1);
         // add the number of ways from that path to the ans
         board[row][col] = 0;
         // reset it
