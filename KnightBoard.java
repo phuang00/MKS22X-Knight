@@ -55,18 +55,15 @@ public class KnightBoard{
   }
 
   public String toString(){
-    String digits = "_";
-    if (board.length * board[0].length > 10) digits = "__";
-    // if the row * columns >= 10, default digits is "__" instead of "_"
     String ans = "";
     for (int i = 0; i < board.length; i++){
       for (int j = 0; j < board[i].length; j++){
         int temp = board[i][j];
-        if (temp == 0) ans += digits;
-        // if there is no knight on that spot, add the default underscores to the ans
-        else if (temp < 10 && digits.length() == 2) ans += "_" + temp;
-        // else if the knight on the spot is less than ten but the row * columns has more than one digit,
-        // add an underscore and the number of the knight
+        if (temp == 0) ans += " _";
+        // if there is no knight on that spot, add an underscore to the ans to hold the spot
+        else if (temp < 10) ans += " " + temp;
+        // else if the knight on the spot is less than ten
+        // add a space and the number of the knight
         else ans += temp;
         // else just add the number of the knight to the ans
         if (j != board[i].length - 1) ans += " ";
