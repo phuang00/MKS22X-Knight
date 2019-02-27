@@ -39,7 +39,7 @@ public class KnightBoard{
             i += coords[x];
             j += coords[x + 1];
             // add it to i and j
-            if (!(i < 0 || i >= moves.length || j < 0 || j >= moves[i].length)){
+            if (!outOfBounds(i,j)){
               // if both i and j do not go out of bounds, add one to the number of moves
               ans++;
             }
@@ -82,7 +82,7 @@ public class KnightBoard{
     int[] ans = new int[moves[row][col]];
     int count = 0;
     for (int i = 0; i < coords.length; i+=2){
-      if (!(row + coords[i] < 0 || row + coords[i] >= board.length || col + coords[i + 1] < 0 || col + coords[i + 1] >= board[0].length)){
+      if (!outOfBounds(row + coords[i],col + coords[i + 1])){
         ans[count] = i;
         count++;
       }
@@ -108,11 +108,8 @@ public class KnightBoard{
    or out of bounds.
    */
   public boolean solve(int startingRow, int startingCol){
-    if (startingRow < 0 ||
-        startingCol < 0 ||
-        startingRow >= board.length ||
-        startingCol >= board[0].length) throw new IllegalArgumentException();
-    //if the parameters are negative or out of bounds, throw IllegalArgumentException
+    if (outOfBounds(startingRow,startingCol)) throw new IllegalArgumentException();
+    //if the parameters are out of bounds, throw IllegalArgumentException
     for (int i = 0; i < board.length; i++){
       for (int j = 0; j < board[i].length; j++){
         if (board[i][j] != 0) throw new IllegalStateException();
@@ -129,11 +126,8 @@ public class KnightBoard{
    or out of bounds.
    */
   public int countSolutions(int startingRow, int startingCol){
-    if (startingRow < 0 ||
-        startingCol < 0 ||
-        startingRow >= board.length ||
-        startingCol >= board[0].length) throw new IllegalArgumentException();
-    //if the parameters are negative or out of bounds, throw IllegalArgumentException
+    if (outOfBounds(startingRow,startingCol)) throw new IllegalArgumentException();
+    //if the parameters are out of bounds, throw IllegalArgumentException
     for (int i = 0; i < board.length; i++){
       for (int j = 0; j < board[i].length; j++){
         if (board[i][j] != 0) throw new IllegalStateException();
@@ -158,13 +152,16 @@ public class KnightBoard{
     }
   }
 
+  private boolean outOfBounds(int row, int col){
+    return row < 0 || row >= board.length || col < 0 || col >= board[0].length;
+  }
 
   private boolean solveH(int row ,int col, int level){
     if (level == board.length * board[0].length && board[row][col] == 0) {
       board[row][col] = level;
       return true;
     }
-    if (row < 0 || row >= board.length || col < 0 || col >= board[0].length) {
+    if (outOfBounds(row,col)) {
       // if either the row or col is out of bounds, return false
       return false;
     }
