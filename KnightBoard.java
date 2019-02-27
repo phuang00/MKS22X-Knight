@@ -82,7 +82,9 @@ public class KnightBoard{
     int[] ans = new int[moves[row][col]];
     int count = 0;
     for (int i = 0; i < coords.length; i+=2){
-      if (!outOfBounds(row + coords[i],col + coords[i + 1])){
+      int x = row + coords[i];
+      int y = col + coords[i + 1];
+      if (!outOfBounds(x,y) && moves[x][y] > 0){
         ans[count] = i;
         count++;
       }
@@ -168,6 +170,11 @@ public class KnightBoard{
     if (board[row][col] == 0){
       // if there is no knight at the given row and col
       int[] temp = reorder(row, col);
+      int tempo = moves[row][col];
+      moves[row][col] = 0;
+      for (int i = 0; i < temp.length; i++){
+        moves[row + coords[temp[i]]][col + coords[temp[i] + 1]]--;
+      }
       for (int i = 0; i < temp.length; i++){
         // for every one of the eight paths the knight can go
         board[row][col] = level;
@@ -175,6 +182,10 @@ public class KnightBoard{
         // if the successive knights works, return true
         board[row][col] = 0;
       }
+      for (int i = 0; i < temp.length; i++){
+        moves[row + coords[temp[i]]][col + coords[temp[i] + 1]]++;
+      }
+      moves[row][col] = tempo;
     }
     return false;
     // else return false
